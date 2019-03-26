@@ -63,14 +63,20 @@ function getOperand(operand){
 		case '-':
 		    input_var.value += '-';
 		    operatorSign = '-';
+		    subtract();
+		    console.log('operatorPos ' + operatorPos);
 		    break;
 		case 'x':
 		    input_var.value += '*';
 		    operatorSign = '*';
+		    multiply();
+		    console.log('operatorPos ' + operatorPos);
 		    break;
 		case '/':
 		    input_var.value += '/';
 		    operatorSign = '/';
+		    divide();
+		    console.log('operatorPos ' + operatorPos);
 		    break;
 		case '+/-':
 		    input_var.value += '-' + input_var.value;
@@ -78,17 +84,45 @@ function getOperand(operand){
 	} 
 } 
 
-//add function
-var counter = 0;
+//operator functions
 function add(){ 
 	var input_var = document.getElementById('input');
 	var answer = document.getElementById('answer');
 	var plus = input_var.value.indexOf('+', operatorPos);
 	operatorPos2 = plus;
-	//calculate = parseInt(input_var.value.slice(operatorPos, operatorPos2));
 	calculate2 = parseInt(answer.value);
 	operatorPos = plus + 1;
 	console.log('calculate ' + calculate + ' calculate2 ' + calculate2 + ' plus ' + plus);
+}
+
+function subtract(){ 
+	var input_var = document.getElementById('input');
+	var answer = document.getElementById('answer');
+	var minus = input_var.value.indexOf('-', operatorPos);
+	operatorPos2 = minus;
+	calculate2 = parseInt(answer.value);
+	operatorPos = minus + 1;
+	console.log('calculate ' + calculate + ' calculate2 ' + calculate2 + ' minus ' + minus);
+}
+
+function multiply(){ 
+	var input_var = document.getElementById('input');
+	var answer = document.getElementById('answer');
+	var multiply = input_var.value.indexOf('*', operatorPos);
+	operatorPos2 = multiply;
+	calculate2 = parseInt(answer.value);
+	operatorPos = multiply + 1;
+	console.log('calculate ' + calculate + ' calculate2 ' + calculate2 + ' multiply ' + multiply);
+}
+
+function divide(){ 
+	var input_var = document.getElementById('input');
+	var answer = document.getElementById('answer');
+	var divide = input_var.value.indexOf('/', operatorPos);
+	operatorPos2 = divide;
+	calculate2 = parseInt(answer.value);
+	operatorPos = divide + 1;
+	console.log('calculate ' + calculate + ' calculate2 ' + calculate2 + ' divide ' + divide);
 }
 
 //compute
@@ -122,22 +156,18 @@ function evaluate(){
 
 		//calculate = (calculate === undefined) ? operand1 : (calculate === NaN) ? operand1 : calculate;
 	    
-		if (char == '*' && parseInt(input_var.value.slice(char + 1))) {
-			calculate = (calculate === undefined) ? 1 : (calculate === NaN) ? 1 : calculate;
-			calculate = calculate * index;
+		if (char == '*' && operatorSign == '*') {
+			calculate = calculate2 * index;
 			answer.value =  calculate;
 		}else if (char == '+' && operatorSign == '+') {
-			calculate = (calculate === undefined) ? 0 : (calculate === NaN) ? 0 : calculate;
 			calculate = calculate2 + index;
 			answer.value =  calculate;
-		}else if (char == '-' && parseInt(input_var.value.slice(char + 1))) {
-			calculate = (calculate === undefined) ? 0 : (calculate === NaN) ? 0 : calculate;
-			calculate -= index;
-			answer.value = '=' + calculate;
-		}else if (char == '/' && parseInt(input_var.value.slice(char + 1))) {
-			calculate = (calculate === undefined) ? 0 : (calculate === NaN) ? 0 : calculate;
-			calculate /= index;
-			answer.value = '=' + calculate;
+		}else if (char == '-' && operatorSign == '-') {
+			calculate = calculate2 - index;
+			answer.value = calculate;
+		}else if (char == '/' && operatorSign == '/') {
+			calculate = calculate2 / index;
+			answer.value = calculate;
 		}else{
 			answer.value =  parseInt(input_var.value);
 		}
