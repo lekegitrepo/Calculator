@@ -53,6 +53,7 @@ function getOperand(operand){
 		    break;
 		case '.':
 		    input_var.value += '.';
+		    disableDot();
 		    break;
 		case '+/-':
 		    input_var.value += '-' + input_var.value;
@@ -95,6 +96,17 @@ function backspace(){
 		x = x.substring(0, x.length - 1); // remove the last character in input.
 		input_var.value = x;
 		evaluate();
+		disableDot();
+	}
+}
+
+function disableDot(){
+	var input_var = document.getElementById('input');
+	var disable = document.getElementById("dot");
+	if (input_var.value.indexOf('.') > 0) {
+		disable.disabled = true;
+	}else{
+		disable.disabled = false;
 	}
 }
 
@@ -105,6 +117,7 @@ function clearScreen(){
 	input_var.value = '';
 	answer.value = '';
 	parse(input_var.value);
+	disableDot();
 }
 
 
@@ -146,5 +159,3 @@ function parse(str) {
         return `${x}.${y}`;
     }
 }
-
-console.log(parse('52+5*2+70'))
