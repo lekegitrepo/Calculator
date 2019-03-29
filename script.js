@@ -125,7 +125,6 @@ function parse(str) {
     var signs = [".", "*", "/", "+", "-"]; 
     var funcs = [dot, multiply, divide, add, subtract];
     var tokens = str.split(/\b/);
-    console.log(tokens)
     for (var round = 0; round < signs.length; round++) { 
         for (var place = 0; place < tokens.length; place++) {   
             if (tokens[place] == signs[round]) {                       
