@@ -6,8 +6,7 @@
 	<script type="text/javascript" src="script.js"></script>
 </head>
 <body>
-	<header><h1>Calculator</h1></header>
-
+	
 	<table>
 		<!-- input display section -->
 		<tr>
@@ -18,14 +17,14 @@
 			</tr>
 
 			<td>
-				<input type="text" id="input" placeholder="0" readonly="readonly">
+				<input type="text" id="input" placeholder="0" readonly="readonly" length="2">
 				<input type="text" id="answer" readonly="readonly" style="color: green;">
 			</td>
 		</tr>
 		<!-- button section -->
 		<tr>
 			<td>
-				<input type="button" value=" CE " onclick="clearScreen()" style="color: white; background: red;">
+				<input type="button" value=" CE " onclick="clearScreen()" style="color: white; background: #96873b;">
 				<input type="button" value=" &#247;" onclick="getOperand('/')">
 				<input type="button" value=" x " onclick="getOperand('x')">
 				<input type="button" value=" &#8592; " onclick="backspace()" style="color: red;">
@@ -43,11 +42,11 @@
 				<input type="button" value="7" onclick="getNumber(7)">
 				<input type="button" value="8" onclick="getNumber(8)">
 				<input type="button" value="9" onclick="getNumber(9)">
-				<input type="button" value="( )" onclick="brackets()">
+				<input type="button" value="." onclick="getOperand('.')">
 				<br>
 				<input type="button" value=" +/- " onclick="getOperand('+/-')">
 				<input type="button" value=" 0 " onclick="getNumber(0)">
-				<input type="button" value=" = " onclick="compute()" style="width: 120px; color: white; background: green;">
+				<input type="button" value=" = " onclick="compute()" style="width: 120px; color: white; background: #254825;">
 				<br>
 			</td>
 		</tr>

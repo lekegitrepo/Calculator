@@ -1,51 +1,36 @@
 
-var calculate;
-var operand1;
-var operatorSign = '';
-var operatorPos = 0;
-var operatorPos2 = 0;
 function getNumber(number){
 	var input_var = document.getElementById('input');
 	switch(number){
 		case 1:
 		    input_var.value += '1';
-		    evaluate();
 		    break;
 		case 2:
 		    input_var.value += '2';
-		    evaluate();
 		    break;
 		case 3:
 		    input_var.value += '3';
-		    evaluate();
 		    break;
 		case 4:
 		    input_var.value += '4';
-		    evaluate();
 		    break;
 	    case 5:
 		    input_var.value += '5';
-		    evaluate();
 		    break;
 	    case 6:
 		    input_var.value += '6';
-		    evaluate();
 		    break;
 	    case 7:
 		    input_var.value += '7';
-		    evaluate();
 		    break;
 	    case 8:
 		    input_var.value += '8';
-		    evaluate();
 		    break;
 	    case 9:
 		    input_var.value += '9';
-		    evaluate();
 		    break;
 	    case 0:
 		    input_var.value += '0';
-		    evaluate(0);
 		    break;
 	}
 }
@@ -56,27 +41,18 @@ function getOperand(operand){
 	switch(operand){
 		case '+':
 		    input_var.value += '+';
-		    operatorSign = '+';
-		    add();
-		    console.log('operatorPos ' + operatorPos);
 		    break;
 		case '-':
 		    input_var.value += '-';
-		    operatorSign = '-';
-		    subtract();
-		    console.log('operatorPos ' + operatorPos);
 		    break;
 		case 'x':
 		    input_var.value += '*';
-		    operatorSign = '*';
-		    multiply();
-		    console.log('operatorPos ' + operatorPos);
 		    break;
 		case '/':
 		    input_var.value += '/';
-		    operatorSign = '/';
-		    divide();
-		    console.log('operatorPos ' + operatorPos);
+		    break;
+		case '.':
+		    input_var.value += '.';
 		    break;
 		case '+/-':
 		    input_var.value += '-' + input_var.value;
@@ -86,106 +62,33 @@ function getOperand(operand){
 
 /*operator functions*/
 
-function add(){ 
-	var input_var = document.getElementById('input');
-	var answer = document.getElementById('answer');
-	var plus = input_var.value.indexOf('+', operatorPos);
-	operatorPos2 = plus;
-	operand1 = parseInt(answer.value);
-	operatorPos = plus + 1;
-	console.log('calculate ' + calculate + ' operand1 ' + operand1 + ' plus ' + plus);
-}
-
-function subtract(){ 
-	var input_var = document.getElementById('input');
-	var answer = document.getElementById('answer');
-	var minus = input_var.value.indexOf('-', operatorPos);
-	operatorPos2 = minus;
-	operand1 = parseInt(answer.value);
-	operatorPos = minus + 1;
-	console.log('calculate ' + calculate + ' operand1 ' + operand1 + ' minus ' + minus);
-}
-
-function multiply(){ 
-	var input_var = document.getElementById('input');
-	var answer = document.getElementById('answer');
-	var multiply = input_var.value.indexOf('*', operatorPos);
-	operatorPos2 = multiply;
-	operand1 = parseInt(answer.value);
-	operatorPos = multiply + 1;
-	console.log('calculate ' + calculate + ' operand1 ' + operand1 + ' multiply ' + multiply);
-}
-
-function divide(){ 
-	var input_var = document.getElementById('input');
-	var answer = document.getElementById('answer');
-	var divide = input_var.value.indexOf('/', operatorPos);
-	operatorPos2 = divide;
-	operand1 = parseInt(answer.value);
-	operatorPos = divide + 1;
-	console.log('calculate ' + calculate + ' operand1 ' + operand1 + ' divide ' + divide);
-}
 
 //compute
 function compute(){
-	var input_var = document.getElementById('input');
-	if (!parseInt(input_var.value.charAt(input_var.value.length - 1))) {
-		console.log(input_var.value.charAt(input_var.value.length - 1));
-		return;
-	}
-	var ans = Math.floor(+eval(input_var.value));
-	document.getElementById('answer').value = '=' + ans;
-	//console.log(input_var.value.charAt(input_var.value.length - 1));
-	console.log(input_var.value.length)
+	evaluate();
 }
 
 function evaluate(){
 	var input_var = document.getElementById('input');
 	var answer = document.getElementById('answer');
 
-	//answer.value =  parseInt(input_var.value);
-
-	var char = input_var.value.charAt(input_var.value.lastIndexOf(operatorSign)); // last operator before next digit.
-	
-	if (parseInt(input_var.value.slice(operatorPos))) {
-		var operand2 = parseInt(input_var.value.slice(operatorPos));
-	    console.log('operand2 ' + operand2);
-	    console.log('operatorSign ' + operatorSign);
+	if (input_var.value.length < 1 || input_var.value.length == null) {
+		answer.value = '';
+		return;
 	}
 
-		if (char == '*' && operatorSign == '*') {
-			calculate = operand1 * operand2;
-			answer.value =  calculate;
-		}else if (char == '+' && operatorSign == '+') {
-			calculate = operand1 + operand2;
-			answer.value =  calculate;
-		}else if (char == '-' && operatorSign == '-') {
-			calculate = operand1 - operand2;
-			answer.value = calculate;
-		}else if (char == '/' && operatorSign == '/') {
-			calculate = operand1 / operand2;
-			answer.value = calculate;
-		}else{
-			answer.value =  parseInt(input_var.value);
-		}
+	if (!parseInt(input_var.value.charAt(input_var.value.length - 1))) {
+		return;
+	}
+
+	answer.value =  parse(input_var.value);
 }
 
-//bracket
-var i = 0;
-function brackets(){
-	var input_var = document.getElementById('input');
-	if (i == 0) {
-		input_var.value += '(';
-		i = 1;
-	}else if (i == 1) {
-		input_var.value += ')';
-		i = 1;
-	}
-}
 
 // backspace
 function backspace(){
 	var input_var = document.getElementById('input');
+	var answer = document.getElementById('answer');
 	var x = input_var.value;
 	if (x.length > 0) {
 		x = x.substring(0, x.length - 1); // remove the last character in input.
@@ -197,4 +100,43 @@ function backspace(){
 function clearScreen(){
 	document.getElementById('input').value = "";
 	document.getElementById('answer').value = "";
+}
+
+
+function parse(str) {
+    var signs = [".", "*", "/", "+", "-"]; 
+    var funcs = [dot, multiply, divide, add, subtract];
+    var tokens = str.split(/\b/);
+    for (var round = 0; round < signs.length; round++) { 
+        for (var place = 0; place < tokens.length; place++) {   
+            if (tokens[place] == signs[round]) {                       
+                var a = (str.indexOf('.')) ? parseFloat(tokens[place - 1]) : parseInt(tokens[place - 1]); 
+                var b = (str.indexOf('.')) ? parseFloat(tokens[place + 1]) : parseInt(tokens[place + 1]); 
+                var result = funcs[round](a, b);          
+                tokens[place - 1] = result.toString();
+                tokens.splice(place--, 2);
+            }
+        }
+    }
+    return tokens[0];                 
+
+    function multiply(x, y) {                   
+        return x * y;
+    }
+
+    function divide(x, y) {                   
+        return x / y;
+    }
+
+    function add(x, y) {                        
+        return x + y;
+    }
+
+    function subtract(x, y) {                   
+        return x - y;
+    }
+
+    function dot(x, y) {                   
+        return `${x}.${y}`;
+    }
 }
