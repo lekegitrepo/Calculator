@@ -77,7 +77,8 @@ function evaluate(){
 		return;
 	}
 
-	if (!parseInt(input_var.value.charAt(input_var.value.length - 1))) {
+	if (!parseInt(input_var.value.charAt(input_var.value.length - 1)) && 
+		input_var.value.charAt(input_var.value.length - 1) !== '0') {
 		return;
 	}
 
@@ -93,13 +94,17 @@ function backspace(){
 	if (x.length > 0) {
 		x = x.substring(0, x.length - 1); // remove the last character in input.
 		input_var.value = x;
+		evaluate();
 	}
 }
 
 //clear screen
 function clearScreen(){
-	document.getElementById('input').value = "";
-	document.getElementById('answer').value = "";
+	var input_var = document.getElementById('input');
+	var answer = document.getElementById('answer');
+	input_var.value = '';
+	answer.value = '';
+	parse(input_var.value);
 }
 
 
@@ -107,6 +112,7 @@ function parse(str) {
     var signs = [".", "*", "/", "+", "-"]; 
     var funcs = [dot, multiply, divide, add, subtract];
     var tokens = str.split(/\b/);
+    console.log(tokens)
     for (var round = 0; round < signs.length; round++) { 
         for (var place = 0; place < tokens.length; place++) {   
             if (tokens[place] == signs[round]) {                       
@@ -140,3 +146,5 @@ function parse(str) {
         return `${x}.${y}`;
     }
 }
+
+console.log(parse('52+5*2+70'))

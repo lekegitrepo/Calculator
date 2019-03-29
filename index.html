@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="script.js"></script>
 </head>
 <body>
-	
+
 	<table>
 		<!-- input display section -->
 		<tr>
@@ -17,8 +17,8 @@
 			</tr>
 
 			<td>
-				<input type="text" id="input" placeholder="0" readonly="readonly" length="2">
-				<input type="text" id="answer" readonly="readonly" style="color: green;">
+				<input type="text" id="input" placeholder="0" readonly="readonly" maxlength="10">
+				<input type="text" id="answer" readonly="readonly" style="color: green;" maxlength="15">
 			</td>
 		</tr>
 		<!-- button section -->
@@ -45,7 +45,7 @@
 				<input type="button" value="." onclick="getOperand('.')">
 				<br>
 				<input type="button" value=" +/- " onclick="getOperand('+/-')">
-				<input type="button" value=" 0 " onclick="getNumber(0)">
+				<input type="button" value="0" onclick="getNumber(0)">
 				<input type="button" value=" = " onclick="compute()" style="width: 120px; color: white; background: #254825;">
 				<br>
 			</td>
